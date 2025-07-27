@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('/images/vecteezy_manuel-antonio-national-park-costa-rica-top-view-place_50686465.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#a {
+  height: 90vh;
+  width: 90vw;
+  max-width: 1300px;
+  max-height: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#c, #d {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#c {
+  flex: 1;
+  background-color: #fff176;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+#d {
+  flex: 1;
+  background-color: #66bb6a;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#signin-h1, #signup-h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#signin-p, #signup-p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select {
+  margin-bottom: 12px;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  margin-top: 20px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+#signin-button {
+  background-color: #388e3c;
+  color: white;
+}
+
+#signin-button:hover {
+  background-color: #2e7d32;
+}
+
+#signup-button {
+  background-color: white;
+  color: #2e7d32;
+  border: 2px solid white;
+}
+
+#signup-button:hover {
+  background-color: #f1f1f1;
+}
+
+#signin-forgot {
+  margin-top: 10px;
+  text-align: center;
+}
+
+#signin-forgot a {
+  color: #333;
+  text-decoration: none;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 768px) {
+  #a {
+    flex-direction: column;
+    height: auto;
+    width: 90vw;
+  }
+
+  #c, #d {
+    width: 100%;
+    border-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}

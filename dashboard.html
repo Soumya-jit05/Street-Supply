@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplier Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gray-800 p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-2xl font-bold text-orange-500">StreetSupply Dashboard</h1>
+    <div>
+      <button class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600">Logout</button>
+    </div>
+  </header>
+
+  <!-- Dashboard Main -->
+  <main class="max-w-6xl mx-auto p-6">
+    <h2 class="text-3xl font-semibold mb-6">Welcome, Supplier!</h2>
+
+    <!-- Circle Chart Section -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg mb-6">
+      <h3 class="text-xl font-bold mb-4">Earnings Overview</h3>
+      <canvas id="earningsChart" class="max-w-md mx-auto"></canvas>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+      <div class="bg-gray-800 p-4 rounded-lg text-center shadow hover:shadow-lg transition">
+        <h4 class="text-lg font-semibold">Today</h4>
+        <p id="todayEarnings" class="text-2xl font-bold text-green-400">₹0</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg text-center shadow hover:shadow-lg transition">
+        <h4 class="text-lg font-semibold">Yesterday</h4>
+        <p id="yesterdayEarnings" class="text-2xl font-bold text-blue-400">₹0</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg text-center shadow hover:shadow-lg transition">
+        <h4 class="text-lg font-semibold">Top Product</h4>
+        <p id="topProduct" class="text-xl font-bold text-orange-400">-</p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg text-center shadow hover:shadow-lg transition">
+        <h4 class="text-lg font-semibold">Least Product</h4>
+        <p id="leastProduct" class="text-xl font-bold text-red-400">-</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Fetch data from backend API
+    fetch('http://localhost:5000/api/dashboard')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('todayEarnings').innerText = `₹${data.todayEarnings}`;
+        document.getElementById('yesterdayEarnings').innerText = `₹${data.yesterdayEarnings}`;
+        document.getElementById('topProduct').innerText = data.topProduct;
+        document.getElementById('leastProduct').innerText = data.leastProduct;
+
+        // Chart.js for circular earnings chart
+        const ctx = document.getElementById('earningsChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Today', 'Yesterday', 'Tomorrow (Prediction)'],
+            datasets: [{
+              data: [data.todayEarnings, data.yesterdayEarnings, data.tomorrowPrediction],
+              backgroundColor: ['#34d399', '#3b82f6', '#f59e0b'],
+              hoverOffset: 10
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { color: '#fff' }
+              }
+            }
+          }
+        });
+      })
+      .catch(err => console.error('Error fetching dashboard data:', err));
+  </script>
+
+</body>
+</html>

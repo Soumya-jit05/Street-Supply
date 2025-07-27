@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vendor Dashboard - StreetSupply</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-orange-500">StreetSupply</h1>
+      <div class="flex items-center space-x-4">
+        <button><a href="logout.html" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Logout</a></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <h2 class="text-3xl font-bold mb-6">Welcome, Vendor!</h2>
+
+    <!-- SEARCH BAR -->
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row gap-4">
+      <input type="text" placeholder="Search raw materials (e.g., Onion, Oil)"
+        class="flex-1 border border-gray-300 rounded-lg px-4 py-2">
+      <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">Search</button>
+    </div>
+
+    <!-- FILTER OPTIONS -->
+    <div class="mb-6 flex flex-wrap gap-4">
+      <select class="border px-4 py-2 rounded-lg">
+        <option>Category</option>
+        <option>Vegetables</option>
+        <option>Spices</option>
+        <option>Oils</option>
+      </select>
+      <select class="border px-4 py-2 rounded-lg">
+        <option>Price Range</option>
+        <option>₹0 - ₹50</option>
+        <option>₹50 - ₹100</option>
+        <option>₹100+</option>
+      </select>
+      <select class="border px-4 py-2 rounded-lg">
+        <option>Distance</option>
+        <option>Within 2 km</option>
+        <option>Within 5 km</option>
+        <option>10 km+</option>
+      </select>
+    </div>
+
+    <!-- SUPPLIER LIST -->
+    <h3 class="text-2xl font-semibold mb-4">Available Suppliers</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Supplier Card -->
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-bold text-lg mb-2">Fresh Mart</h4>
+        <p class="text-gray-700">Onion - ₹25/kg</p>
+        <p class="text-gray-500">Stock: 200 kg</p>
+        <div class="flex items-center mt-2 space-x-2">
+          <span class="text-yellow-500">⭐ 4.5</span>
+          <span class="text-sm text-gray-400">(120 reviews)</span>
+        </div>
+        <div class="mt-4 flex space-x-2">
+          <button><a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+        </div>
+      </div>
+
+      <!-- Repeat for more suppliers -->
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-bold text-lg mb-2">Local Farm</h4>
+        <p class="text-gray-700">Potato - ₹20/kg</p>
+        <p class="text-gray-500">Stock: 150 kg</p>
+        <div class="flex items-center mt-2 space-x-2">
+          <span class="text-yellow-500">⭐ 4.3</span>
+          <span class="text-sm text-gray-400">(90 reviews)</span>
+        </div>
+        <div class="mt-4 flex space-x-2">
+          <button><a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+        <h4 class="font-bold text-lg mb-2">Spice Hub</h4>
+        <p class="text-gray-700">Turmeric - ₹120/kg</p>
+        <p class="text-gray-500">Stock: 50 kg</p>
+        <div class="flex items-center mt-2 space-x-2">
+          <span class="text-yellow-500">⭐ 4.8</span>
+          <span class="text-sm text-gray-400">(50 reviews)</span>
+        </div>
+        <div class="mt-4 flex space-x-2">
+          <button><a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <section class="mt-10">
+      <h3 class="text-2xl font-semibold mb-4">Your Active Orders</h3>
+      <div class="bg-white p-4 rounded-lg shadow">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2">Product</th>
+              <th class="py-2">Supplier</th>
+              <th class="py-2">Quantity</th>
+              <th class="py-2">Price</th>
+              <th class="py-2">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2">Onion</td>
+              <td class="py-2">Fresh Mart</td>
+              <td class="py-2">10 kg</td>
+              <td class="py-2">₹250</td>
+              <td class="py-2 text-green-500 font-semibold">Pending</td>
+            </tr>
+            <tr>
+              <td class="py-2">Potato</td>
+              <td class="py-2">Local Farm</td>
+              <td class="py-2">15 kg</td>
+              <td class="py-2">₹300</td>
+              <td class="py-2 text-blue-500 font-semibold">Confirmed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

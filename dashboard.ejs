@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supplier Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-4xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold mb-6 text-orange-500">StreetSupply - Supplier Dashboard</h1>
+
+    <!-- Add Request Form -->
+    <div class="bg-white p-6 rounded shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">Add Customer Request</h2>
+      <form action="/request" method="POST" class="grid gap-4 md:grid-cols-2">
+        <input name="customerName" type="text" placeholder="Customer Name" required class="border px-4 py-2 rounded">
+        <input name="product" type="text" placeholder="Requested Product" required class="border px-4 py-2 rounded">
+        <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 col-span-2">Submit Request</button>
+      </form>
+    </div>
+
+    <!-- View All Requests -->
+    <div class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">Customer Requests</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <% if (requests.length === 0) { %>
+          <li class="text-gray-500">No customer requests yet.</li>
+        <% } else { %>
+          <% requests.forEach(request => { %>
+            <li><strong><%= request.customerName %></strong> requested: <%= request.product %> (<%= request.date.toDateString() %>)</li>
+          <% }) %>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

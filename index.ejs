@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In / Sign Up</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="a">
+    <!-- Login Side -->
+    <div id="c">
+      <h1 id="signin-h1">Welcome Back!</h1>
+      <p id="signin-p">Login with your personal information</p>
+
+      <form action="/login" method="POST">
+        <input type="email" name="email" id="signin-email" placeholder="Email" required />
+        <input type="password" name="password" id="signin-password" placeholder="Password" required />
+        <button type="submit" id="signin-button">Sign In</button>
+      </form>
+
+      <div id="signin-forgot">
+        <a href="#">Forgot your password?</a>
+      </div>
+    </div>
+
+    <!-- Signup Side -->
+    <div id="d">
+      <h1 id="signup-h1">Create Account</h1>
+      <p id="signup-p">Use your email for registration</p>
+
+      <form action="/signup" method="POST">
+        <input type="text" name="name" id="signup-name" placeholder="Name" required />
+        <input type="email" name="email" id="signup-email" placeholder="Email" required />
+        <input type="tel" name="phone" id="signup-phone" placeholder="Phone" />
+        <input type="password" name="password" id="signup-password" placeholder="Password" required />
+        <input type="password" name="confirmPassword" id="signup-confirm-password" placeholder="Confirm Password" required />
+        <label for="signup-role">User Role:</label>
+        <select name="role" id="signup-role" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="user">Vendor</option>
+          <option value="admin">Supplier</option>
+        </select>
+        <button type="submit" id="signup-button">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Place Your Order - StreetSupply</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-orange-500">StreetSupply</h1>
+      <a href="index.html" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Home</a>
+    </div>
+  </header>
+
+  <!-- Order Form Section -->
+  <section class="max-w-lg mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Confirm Your Order</h2>
+
+    <!-- Error Message -->
+    <div id="errorBox" class="hidden bg-red-100 text-red-600 p-3 rounded mb-4 text-center font-semibold"></div>
+
+    <!-- Form -->
+    <form id="orderForm">
+      <!-- Customer Name -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Full Name <span class="text-red-500">*</span>
+        </label>
+        <input id="fullName" type="text" placeholder="Enter your name" 
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" >
+      </div>
+
+      <!-- Address -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Delivery Address <span class="text-red-500">*</span>
+        </label>
+        <textarea id="address" placeholder="Enter your address" 
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" rows="3"></textarea>
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Mobile Number <span class="text-red-500">*</span>
+        </label>
+        <input id="mobile" type="tel" placeholder="Enter your mobile number" 
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400" >
+      </div>
+
+      <!-- Payment Method -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-3">
+          Payment Method <span class="text-red-500">*</span>
+        </label>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="payment" value="gpay" class="w-4 h-4 text-orange-500">
+            <span>Google Pay / UPI</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="payment" value="cod" class="w-4 h-4 text-orange-500">
+            <span>Cash on Delivery</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="payment" value="card" class="w-4 h-4 text-orange-500">
+            <span>Credit / Debit Card</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Confirm Button -->
+      <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 text-lg font-semibold">
+        Confirm Order
+      </button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-6 mt-10">
+    <p>&copy; 2025 StreetSupply. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript Validation -->
+  <script>
+    const form = document.getElementById("orderForm");
+    const errorBox = document.getElementById("errorBox");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      const name = document.getElementById("fullName").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const payment = document.querySelector('input[name="payment"]:checked');
+
+      // Validation
+      if (!name) {
+        showError("Full Name is required!");
+        return;
+      }
+      if (!address) {
+        showError("Delivery Address is required!");
+        return;
+      }
+      if (!mobile || !/^[6-9]\d{9}$/.test(mobile)) {
+        showError("Enter a valid 10-digit Mobile Number!");
+        return;
+      }
+      if (!payment) {
+        showError("Please select a Payment Method!");
+        return;
+      }
+
+      // If all fields are valid
+      errorBox.classList.add("hidden");
+      alert(" Order placed successfully!");
+      form.reset();
+    });
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>

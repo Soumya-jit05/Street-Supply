@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compare Suppliers - StreetSupply</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-orange-500">StreetSupply</h1>
+      <nav class="hidden md:flex space-x-6 font-medium">
+        <a href="index.html" class="hover:text-orange-500">Home</a>
+        <a href="vendor.html" class="hover:text-orange-500">Dashboard</a>
+        <a href="#" class="hover:text-orange-500">My Orders</a>
+        <a href="#" class="hover:text-orange-500">Profile</a>
+      </nav>
+      <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Logout</button>
+    </div>
+  </header>
+
+  <!-- PAGE HEADING -->
+  <section class="text-center py-10 bg-orange-100">
+    <h2 class="text-3xl font-bold mb-2">Compare Suppliers for Onion</h2>
+    <p class="text-lg">Choose the best deal based on price, rating, and distance.</p>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <main class="max-w-6xl mx-auto px-6 py-10">
+    <div class="bg-white rounded-lg shadow overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-100 text-gray-700">
+            <th class="p-4">Supplier</th>
+            <th class="p-4">Price (₹/kg)</th>
+            <th class="p-4">Stock (kg)</th>
+            <th class="p-4">Distance</th>
+            <th class="p-4">Rating</th>
+            <th class="p-4 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-4 font-semibold">Fresh Mart</td>
+            <td class="p-4">₹25</td>
+            <td class="p-4">200</td>
+            <td class="p-4">2 km</td>
+            <td class="p-4 text-yellow-500">⭐ 4.5</td>
+            <td class="p-4 text-center">
+              <button> <a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+            </td>
+          </tr>
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-4 font-semibold">Local Farm</td>
+            <td class="p-4">₹24</td>
+            <td class="p-4">150</td>
+            <td class="p-4">3 km</td>
+            <td class="p-4 text-yellow-500">⭐ 4.3</td>
+            <td class="p-4 text-center">
+              <button><a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="p-4 font-semibold">Spice Hub</td>
+            <td class="p-4">₹26</td>
+            <td class="p-4">100</td>
+            <td class="p-4">1.5 km</td>
+            <td class="p-4 text-yellow-500">⭐ 4.8</td>
+            <td class="p-4 text-center">
+              <button><a href="order.html" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Order Now</a></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supplier Dashboard - StreetSupply</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #10b981;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease;
+      z-index: 1000;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-orange-500">StreetSupply</h1>
+      <div class="flex items-center space-x-4">
+        <a href="#" class="hover:text-orange-500">Dashboard</a>
+         <button><a href="logout.html" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Logout</a></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <h2 class="text-3xl font-bold mb-6">Welcome, Supplier!</h2>
+
+    <!-- ADD PRODUCT -->
+    <section class="bg-white p-6 rounded-lg shadow mb-8">
+      <h3 class="text-2xl font-semibold mb-4">Add New Product</h3>
+      <form id="addProductForm" class="grid md:grid-cols-4 gap-4">
+        <input id="productName" type="text" placeholder="Product Name" class="border rounded-lg px-4 py-2" required>
+        <input id="productPrice" type="number" placeholder="Price (₹)" class="border rounded-lg px-4 py-2" required>
+        <input id="productStock" type="number" placeholder="Stock (kg)" class="border rounded-lg px-4 py-2" required>
+        <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">Add Product</button>
+      </form>
+    </section>
+
+    <!-- MY PRODUCTS -->
+    <section class="mb-8">
+      <h3 class="text-2xl font-semibold mb-4">My Products</h3>
+      <div id="productContainer" class="grid md:grid-cols-3 gap-6">
+        <!-- Default Products -->
+        <div class="bg-white p-4 rounded-lg shadow" data-name="Onion" data-price="25" data-stock="200">
+          <h4 class="font-bold text-lg mb-2">Onion</h4>
+          <p class="text-gray-700">Price: ₹25/kg</p>
+          <p class="text-gray-500">Stock: 200 kg</p>
+          <div class="mt-4 flex space-x-2">
+            <button onclick="openEditPopup(this)" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
+            <button onclick="deleteProduct(this)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOMER REQUEST SECTION -->
+    <section class="bg-white p-6 rounded-lg shadow mb-8">
+      <h3 class="text-2xl font-semibold mb-4">Customer Product Requests</h3>
+      <form id="requestForm" class="flex space-x-4 mb-4">
+        <input id="requestName" type="text" placeholder="Customer Name" class="border rounded-lg px-4 py-2" required>
+        <input id="requestProduct" type="text" placeholder="Requested Product" class="border rounded-lg px-4 py-2" required>
+        <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">Send Request</button>
+      </form>
+      <ul id="requestList" class="list-disc pl-5 text-gray-700"></ul>
+    </section>
+
+    <!-- INCOMING ORDERS -->
+    <section>
+      <h3 class="text-2xl font-semibold mb-4">Incoming Orders</h3>
+      <div class="bg-white p-4 rounded-lg shadow">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2">Vendor</th>
+              <th class="py-2">Product</th>
+              <th class="py-2">Quantity</th>
+              <th class="py-2">Price</th>
+              <th class="py-2">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-2">Ramesh Chaat</td>
+              <td class="py-2">Onion</td>
+              <td class="py-2">10 kg</td>
+              <td class="py-2">₹250</td>
+              <td class="py-2">
+                <button onclick="confirmOrder()" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Confirm</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- EDIT POPUP -->
+  <div id="editPopup" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded shadow w-96">
+      <h3 class="text-xl font-bold mb-4">Edit Product</h3>
+      <input id="editName" type="text" class="border w-full px-3 py-2 mb-3" />
+      <input id="editPrice" type="number" class="border w-full px-3 py-2 mb-3" />
+      <input id="editStock" type="number" class="border w-full px-3 py-2 mb-3" />
+      <button onclick="saveEdit()" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+      <button onclick="closeEditPopup()" class="ml-2 bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Order Confirmed</div>
+
+<script>
+let currentCard = null;
+
+// Add Product
+document.getElementById('addProductForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('productName').value;
+  const price = document.getElementById('productPrice').value;
+  const stock = document.getElementById('productStock').value;
+
+  const card = document.createElement('div');
+  card.className = "bg-white p-4 rounded-lg shadow";
+  card.dataset.name = name;
+  card.dataset.price = price;
+  card.dataset.stock = stock;
+
+  card.innerHTML = `
+    <h4 class="font-bold text-lg mb-2">${name}</h4>
+    <p class="text-gray-700">Price: ₹${price}/kg</p>
+    <p class="text-gray-500">Stock: ${stock} kg</p>
+    <div class="mt-4 flex space-x-2">
+      <button onclick="openEditPopup(this)" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
+      <button onclick="deleteProduct(this)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+    </div>`;
+  document.getElementById('productContainer').appendChild(card);
+  e.target.reset();
+});
+
+// ✅ Edit Popup
+function openEditPopup(button) {
+  currentCard = button.parentElement.parentElement;
+  document.getElementById('editName').value = currentCard.dataset.name;
+  document.getElementById('editPrice').value = currentCard.dataset.price;
+  document.getElementById('editStock').value = currentCard.dataset.stock;
+  document.getElementById('editPopup').classList.remove('hidden');
+}
+function closeEditPopup() {
+  document.getElementById('editPopup').classList.add('hidden');
+}
+function saveEdit() {
+  const name = document.getElementById('editName').value;
+  const price = document.getElementById('editPrice').value;
+  const stock = document.getElementById('editStock').value;
+
+  currentCard.dataset.name = name;
+  currentCard.dataset.price = price;
+  currentCard.dataset.stock = stock;
+
+  currentCard.querySelector('h4').innerText = name;
+  currentCard.querySelectorAll('p')[0].innerText = `Price: ₹${price}/kg`;
+  currentCard.querySelectorAll('p')[1].innerText = `Stock: ${stock} kg`;
+
+  closeEditPopup();
+}
+
+// ✅ Delete Product
+function deleteProduct(button) {
+  button.parentElement.parentElement.remove();
+}
+
+// ✅ Confirm Order (with Toast)
+function confirmOrder() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Customer Request Add
+document.getElementById('requestForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('requestName').value;
+  const product = document.getElementById('requestProduct').value;
+  const li = document.createElement('li');
+  li.textContent = `${name} requested: ${product}`;
+  document.getElementById('requestList').appendChild(li);
+  e.target.reset();
+});
+</script>
+
+</body>
+</html>
